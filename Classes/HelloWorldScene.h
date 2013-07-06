@@ -6,6 +6,7 @@
 class HelloWorld : public cocos2d::Layer
 {
 public:
+    const int numShips = 200;
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
 
@@ -15,8 +16,22 @@ public:
     // a selector callback
     void menuCloseCallback(Object* pSender);
 
+    void addShip(int index, int x,int y);
+    void addShips();
+
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
+
+    virtual void ccTouchesMoved(cocos2d::Set *pTouches, cocos2d::Event *pEvent);
+    virtual void ccTouchesEnded(cocos2d::Set *pTouches, cocos2d::Event *pEvent);
+    virtual void ccTouchesBegan(cocos2d::Set *pTouches, cocos2d::Event *pEvent);
+
+ protected:
+    
+    cocos2d::Array *_ships;
+    cocos2d::SpriteBatchNode * _batchNode;
+
+    int _touchMoved;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
